@@ -7,11 +7,11 @@ int main()
     int arr[max], n, i;
     cout << "Enter the number of elements: ";
     cin >> n;
-    cout << "Enter " << n << " 4values one by one: " << endl;
-    for (i = 0; i < n; i++)
-    {
-        cin >> arr[n];
+    cout << "Enter " << n << "values one by one: " << endl;
+    for (i = 0; i < n; i++){
+        cin >> arr[i];
     }
+    
     int key;
     cout << "Enter the key: ";
     cin >> key;
@@ -19,28 +19,21 @@ int main()
     int start, end, mid;
     start = 0;
     end = n - 1;
-    while (start <= end)
-    {
+    while (start <= end){
         mid = (start + end) / 2;
-        if (start == end)
-        {
-            break;
+        
+        if (key == arr[mid]){
+            cout << "Item Found";
+            return 0;
         }
-        if (key > arr[mid])
-        {
+        if (key > arr[mid]){
             start = mid + 1;
         }
-        if (key < arr[mid])
-        {
+        else{
             end = mid - 1;
         }
     }
-    if (start <= end)
-    {
-        cout << "Item found";
-    }
-    else
-    {
-        cout << "Item noy found";
-    }
+
+    cout << "Item not found";
+    return 0;
 }
