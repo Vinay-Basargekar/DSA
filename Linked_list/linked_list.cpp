@@ -11,6 +11,7 @@ class List{
     node *head;
 
 public:
+    // Constructor to initialize head pointer to NULL
     List() { head = NULL; }
 
     void create(int n)
@@ -22,11 +23,13 @@ public:
             cout << "Enter data: ";
             cin >> nn ->data;
             nn->link = NULL;
+            // If it's the first node being added, set it as head and continue
             if(i==0){
                 head=nn;
                 prev=nn;
                 continue;
             }
+            // Linking the current node to the previous one
             prev ->link=nn;
             prev = nn;
         }
