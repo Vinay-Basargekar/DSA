@@ -214,8 +214,7 @@ int main()
     lst.create(n);
     lst.display();
 
-    while (true)
-    {
+    do{
         cout << endl;
         cout << "Operations" << endl;
         cout << "1. Enter front end node" << endl;
@@ -266,6 +265,6 @@ int main()
             break;
         }
         lst.display();
-    }
+    }while(op != 8);
     return 0;
 }
