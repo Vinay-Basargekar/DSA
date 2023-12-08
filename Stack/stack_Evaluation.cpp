@@ -27,7 +27,8 @@ int Stack::isEmpty(){
 }
 
 void Stack::push(float x){
-    node *nn = new node;
+    node *nn;
+    nn = new node;
     if (nn == NULL){
         cout << "Stack Full";
         exit(0);
@@ -47,14 +48,6 @@ float Stack::pop(){
     head = temp->link;
     delete temp;
     return y;
-}
-
-void Stack::disp(){
-    node *t = head;
-    while (t != NULL){
-        cout << t->data << " ";
-        t = t->link;
-    }
 }
 
 int isOperand(char symb){
