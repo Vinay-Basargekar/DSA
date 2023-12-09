@@ -2,19 +2,16 @@
 #include <cmath>
 using namespace std;
 
-struct node
-{
+struct node{
     float data;
     node *link;
 };
 
-class Stack
-{
+class Stack{
     node *head;
 
 public:
-    Stack()
-    {
+    Stack(){
         head = NULL;
     }
     void push(float x);
@@ -23,16 +20,13 @@ public:
     int isEmpty();
 };
 
-int Stack::isEmpty()
-{
+int Stack::isEmpty(){
     return head == NULL ? 1 : 0;
 }
 
-void Stack::push(float x)
-{
+void Stack::push(float x){
     node *nn = new node;
-    if (nn == NULL)
-    {
+    if (nn == NULL){
         cout << "Stack Full";
         exit(0);
     }
@@ -41,8 +35,7 @@ void Stack::push(float x)
     head = nn;
 }
 
-float Stack::pop()
-{
+float Stack::pop(){
     if (isEmpty())
     {
         cout << "Stack is empty";
@@ -55,18 +48,7 @@ float Stack::pop()
     return y;
 }
 
-void Stack::disp()
-{
-    node *t = head;
-    while (t != NULL)
-    {
-        cout << t->data << " ";
-        t = t->link;
-    }
-}
-
-int isOperand(char symb)
-{
+int isOperand(char symb){
     return (symb >= 'a' && symb <= 'z') || (symb >= 'A' && symb <= 'Z') || (symb >= '0' && symb <= '9');
 }
 
@@ -86,7 +68,9 @@ int prcd(char ch){
 }
 
 void convert(char infi[80],char postf[80]){
-    Stack s1; int i,j; char symb,st_symb;
+    Stack s1; 
+    int i,j; 
+    char symb,st_symb;
     for(i=0;infi[i]!='\0';i++){
         symb = infi[i];
         if(isOperand(symb)){
