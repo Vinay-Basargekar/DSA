@@ -3,11 +3,11 @@ using namespace std;
 
 const int SIZE = 10;
 
-class Queue{
+class CQueue{
     int arr[SIZE];
     int r,f;
     public:
-    Queue(){
+    CQueue(){
         f = 0;
         r = -1;
     }
@@ -16,7 +16,7 @@ class Queue{
     void dispq();
 };
 
-void Queue::insert(int x){
+void CQueue::insert(int x){
     if(r==SIZE-1){
         cout <<"Q full";
         exit(0);
@@ -24,7 +24,7 @@ void Queue::insert(int x){
     arr[++r] = x;
 }
 
-int Queue::delitem(){
+int CQueue::delitem(){
     if((r==-1 && f==0) || f>r){
         cout <<"Q empty!";
         exit(0);
@@ -35,7 +35,7 @@ int Queue::delitem(){
     return(arr[f++]);
 }
 
-void Queue::dispq()
+void CQueue::dispq()
 {
     for(int i=f ; i<=r ; i++){
         cout <<arr[i]<<" ";
@@ -43,12 +43,11 @@ void Queue::dispq()
 }
 
 int main(){
-    Queue q;
+    CQueue q;
     q.insert(5);
     q.insert(6);
     q.insert(7);
     q.insert(8);
-    q.delitem();
     q.delitem();
     q.dispq();
 }
