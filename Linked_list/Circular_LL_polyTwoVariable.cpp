@@ -16,7 +16,7 @@ class Polynomial
 public:
     Polynomial()
     {
-        last = nullptr;
+        last = NULL;
     }
 
     void create(int n)
@@ -47,7 +47,7 @@ public:
 
     void display()
     {
-        if (last == nullptr)
+        if (last == NULL)
         {
             cout << "The circular linked list is empty." << endl;
             return;
