@@ -1,77 +1,62 @@
 #include <iostream>
 using namespace std;
 
-const int MAX_STUDENT = 100;
-const int MAX_NAME_LENGTH = 50;
+const int MAX_STUDENTS = 100;
 
-void linearSearch(string names[][MAX_NAME_LENGTH], int n,string key)
+void linearSearch(string names[][1], int n, string key)
 {
-    bool found = false;
     for (int i = 0; i < n; i++)
     {
-        if (names[i][n] == key)
+        if (names[i][0] == key)
         {
-            cout << "Name found.";
-            found = true;
-            break;
+            cout << "Name found." << endl;
+            return;
         }
     }
-    if (!found)
-    {
-        cout << "Name not found.";
-    }
+    cout << "Name not found." << endl;
 }
 
-int binarySearch(string names[][MAX_NAME_LENGTH], int n,string key)
+void insertionSort(string names[][1], int n)
 {
-    // int left = 0, right = n - 1;
-    // while (left <= right)
-    // {
-    //     int mid = left + (right - left) / 2;
-
-    //     if (names[mid][n] == key)
-    //     {
-    //         cout << "Name found";
-    //         return;
-    //     }
-
-    //     if (names[mid][n] < key)
-    //     {
-    //         left = mid + 1;
-    //     }
-    //     else
-    //     {
-    //         right = mid - 1;
-    //     }
-    // }
-    // cout << "Name not found";
-    int row = n;
-    int col = MAX_NAME_LENGTH;
-    int l = 0, h = row * col - 1;
-
-    while (l <= h)
+    cout << "Sorted Names:" << endl;
+    for (int i = 0; i < n; i++)
     {
-        int mid = l + (h - l) / 2;
-
-        int tC = mid % col;
-        int tR = mid / col;
-
-        int val = names[tR][0].compare(key);
-
-        if (val == 0)
+        string current = names[i][0];
+        int j = i - 1;
+        while (j >= 0 && names[j][0] > current)
         {
-            cout << "Name found at index (" << tR << ", " << tC << ")." << endl;
-            return(tR, tC);
+            names[j + 1][0] = names[j][0];
+            j--;
         }
-
-        if (val < 0)
-            l = mid + 1;
-        else
-            h = mid - 1;
+        names[j + 1][0] = current;
+        cout << names[i][0] << endl; // Display the name as it's sorted
     }
+    cout << "Names sorted in alphabetical order using Insertion Sort." << endl;
+}
 
-    cout << "Name not found.\n";
-    return (-1, -1);
+int binarySearch(string names[][1], int n, string key)
+{
+    int low = 0;
+    int high = n - 1;
+    while (low <= high)
+    {
+        int mid = (low + high) / 2;
+        if (names[mid][0] == key)
+        {
+            cout << "Name found." << endl;
+            return mid;
+        }
+        else if (names[mid][0] < key)
+        {
+            low = mid + 1;
+        }
+        else
+        {
+            high = mid - 1;
+        }
+    }
+    cout << "Name not found." << endl;
+    return -1;
 }
 
 int main()
@@ -79,14 +64,16 @@ int main()
     int n;
     cout << "Enter the number of students: ";
     cin >> n;
-    string names[MAX_STUDENT][MAX_NAME_LENGTH];
+    string names[MAX_STUDENTS][1];
 
     // Input student names
-    cout<< "Enter the names of students:\n";
-    for(int i=0 ; i<n ; i++){
+    cout << "Enter the names of students:\n";
+    for (int i = 0; i < n; i++)
+    {
         cout << "Student " << i + 1 << ": ";
-        cin >> names[i][n];
+        cin >> names[i][0]; // Assuming only one name per student for simplicity
     }
+
     int choice;
     string key;
 
@@ -94,36 +81,36 @@ int main()
     {
         cout << "\nMenu:\n";
         cout << "1. Perform Linear Search\n";
-        cout << "2. Perform Binary Search\n";
-        cout << "3. Exit\n";
+        cout << "2. Perform Insertion Sort (Alphabetical Order)\n";
+        cout << "3. Perform Binary Search\n";
+        cout << "4. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
 
         switch (choice)
         {
         case 1:
-            // Input the element to be searched
             cout << "Enter the name to search: ";
             cin >> key;
-
             linearSearch(names, n, key);
             break;
         case 2:
-            // Input the element to be searched
-            cout << "Enter the name to search: ";
-            cin >> key;
-
-            // Perform binary search
-            sort(&names[0][0], &names[0][0] + n * MAX_NAME_LENGTH); // Sorting the 2D array
-            binarySearch(names, n, key);
+            insertionSort(names, n);
             break;
         case 3:
+            cout << "Enter the name to search: ";
+            cin >> key;
+            insertionSort(names, n); // Sort the names before binary search
+            binarySearch(names, n, key);
+            break;
+        case 4:
             cout << "Exiting...";
             return 0;
         default:
             cout << "Invalid choice! Please enter a valid choice.\n";
             break;
         }
-    } while (choice != 3);
+    } while (choice != 4);
+
     return 0;
 }
