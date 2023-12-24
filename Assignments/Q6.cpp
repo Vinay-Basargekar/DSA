@@ -1,3 +1,11 @@
+/* 6. Create Circular List to represent a polynomial for two variables. Write a menu driven
+C++ program to perform following operations on polynomials.
+a) Create polynomial
+b) Display a polynomial
+c) Add two polynomials
+d) Evaluate a given polynomial
+*/
+
 #include <iostream>
 #include <math.h>
 
