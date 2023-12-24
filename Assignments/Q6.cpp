@@ -1,118 +1,322 @@
 #include <iostream>
+#include <math.h>
+
 using namespace std;
 
-struct Node
+struct node
 {
-    float coefficient;
-    int power_x;
-    int power_y;
-    Node *next;
+    int coeffx, powerx;
+    node *link;
 };
 
-class Polynomial
+class clist
 {
-    Node *last;
+    node *head = NULL;
 
 public:
-    Polynomial()
+    clist() { head = NULL; }
+    void create(int n);
+    void display();
+    clist addtopoly(clist ob2);
+    int Evaluate(int x);
+};
+
+// a) Create polynomial
+void clist::create(int n)
+{
+    node *nn, *last = NULL;
+
+    for (int i = 0; i < n; i++)
     {
-        last = NULL;
+        nn = new node;
+        if (nn == NULL)
+        {
+            cout << "memory is full";
+        }
+        cout << "Enter coefficient of x" << endl;
+        cin >> nn->coeffx;
+        cout << "Enter power of x" << endl;
+        cin >> nn->powerx;
+        if (head == NULL)
+        {
+            last = nn;
+            head = nn;
+        }
+        else
+        {
+            last->link = nn;
+            last = nn;
+        }
     }
 
-    void create()
+    if (last != NULL)
     {
-        int n;
-        cout << "Enter the number of terms in the polynomial: ";
-        cin >> n;
-
-        Node *temp = last;
-        for (int i = 0; i < n; ++i)
-        {
-            Node *nn = new Node;
-            cout << "Enter Coefficient: ";
-            cin >> nn->coefficient;
-            cout << "Enter Power of x: ";
-            cin >> nn->power_x;
-            cout << "Enter Power of y: ";
-            cin >> nn->power_y;
-
-            nn->next = NULL;
-
-            if (last == NULL)
-            {
-                last = nn;
-                nn->next = nn;
-                temp = nn;
-            }
-            else
-            {
-                nn->next = temp->next;
-                temp->next = nn;
-                temp = nn;
-            }
-        }
-        last = temp;
+        last->link = head;
     }
+}
 
-    void display()
+// b) Display a polynomial
+void clist::display()
+{
+    node *temp = head;
+    do
     {
-        if (last == NULL)
+        cout << temp->coeffx << "x^" << temp->powerx;
+        temp = temp->link;
+        if (temp != head)
         {
-            cout << "The circular linked list is empty." << endl;
-            return;
+            cout << "+";
         }
+    } while (temp != head);
+    cout << endl;
+}
 
-        Node *temp = last->next;
-        cout << "The polynomial represented by the circular linked list: ";
+// c) Add two polynomials
+
+clist clist::addtopoly(clist ob2)
+
+{
+    clist result, noresult;
+    node *t1 = head;
+    node *t2 = ob2.head;
+
+    if (t1 == NULL && t2 == NULL)
+    {
+        cout << "Both polynomials are empty" << endl;
+        return noresult;
+    }
+    else
+    {
 
         do
         {
-            cout << temp->coefficient << "x^" << temp->power_x << "y^" << temp->power_y;
-            temp = temp->next;
 
-            if (temp != last->next)
+            if (t1->powerx == t2->powerx)
             {
-                cout << " + ";
-            }
-        } while (temp != last->next);
-        cout << endl;
-    }
-};
+                node *nn = new node;
+                int sumofcoeff = t1->coeffx + t2->coeffx;
+                nn->coeffx = sumofcoeff;
+                nn->powerx = t1->powerx;
+                nn->link = NULL;
 
-int main()
+                if (result.head == NULL)
+                {
+                    result.head = nn;
+                    nn->link = result.head;
+                }
+                else
+                {
+                    node *temp = result.head;
+
+                    do
+                    {
+                        temp = temp->link;
+                    } while (temp->link != result.head);
+
+                    temp->link = nn;
+                    nn->link = result.head;
+                }
+
+                t1 = t1->link;
+                t2 = t2->link;
+            }
+            else if (t1->powerx > t2->powerx)
+            {
+                node *nn = new node;
+                nn->coeffx = t1->coeffx;
+                nn->powerx = t1->powerx;
+                nn->link = NULL;
+
+                if (result.head == NULL)
+                {
+                    result.head = nn;
+                    nn->link = result.head;
+                }
+                else
+                {
+                    node *temp = result.head;
+
+                    do
+                    {
+                        temp = temp->link;
+                    } while (temp->link != result.head);
+
+                    temp->link = nn;
+                    nn->link = result.head;
+                }
+
+                t1 = t1->link;
+            }
+            else
+            {
+                node *nn = new node;
+                nn->coeffx = t2->coeffx;
+                nn->powerx = t2->powerx;
+                nn->link = NULL;
+
+                if (result.head == NULL)
+                {
+                    result.head = nn;
+                    nn->link = result.head;
+                }
+                else
+                {
+                    node *temp = result.head;
+                    do
+                    {
+                        temp = temp->link;
+                    } while (temp->link != result.head);
+
+                    temp->link = nn;
+                    nn->link = result.head;
+                }
+
+                t2 = t2->link;
+            }
+
+        } while ((t1 != head || t2 != ob2.head) && t1 != NULL && t2 != NULL);
+    }
+
+    while (t1 != head)
+    {
+        node *nn = new node;
+        nn->coeffx = t1->coeffx;
+        nn->powerx = t1->powerx;
+        nn->link = NULL;
+
+        if (result.head == NULL)
+        {
+            result.head = nn;
+            nn->link = result.head;
+        }
+        else
+        {
+            node *temp = result.head;
+
+            do
+            {
+                temp = temp->link;
+            } while (temp->link != result.head);
+
+            temp->link = nn;
+            nn->link = result.head;
+        }
+
+        t1 = t1->link;
+    }
+
+    while (t2 != ob2.head)
+    {
+        node *nn = new node;
+        nn->coeffx = t2->coeffx;
+        nn->powerx = t2->powerx;
+        nn->link = NULL;
+
+        if (result.head == NULL)
+        {
+            result.head = nn;
+            nn->link = result.head;
+        }
+        else
+        {
+            node *temp = result.head;
+            do
+            {
+                temp = temp->link;
+            } while (temp->link != result.head);
+
+            temp->link = nn;
+            nn->link = result.head;
+        }
+
+        t2 = t2->link;
+    }
+
+    return result;
+}
+
+// d) Evaluate a given polynomial
+
+int clist::Evaluate(int x)
 {
-    Polynomial poly1, poly2, result;
-    int choice;
+    node *temp = head;
+    int cal = 0;
 
     do
     {
-        cout << "\nMenu:\n";
-        cout << "1) Create polynomial\n";
-        cout << "2) Display a polynomial\n";
-        cout << "3) Add two polynomials\n";
-        cout << "4) Exit\n";
+        int y = temp->powerx;
+        cal = temp->coeffx * pow(x, y) + cal;
+
+        temp = temp->link;
+    } while (temp != head);
+
+    return cal;
+}
+
+int main()
+{
+    clist ob1, ob2, result;
+    int choice, n, m, x, ans;
+
+    do
+    {
+        cout << "Menu:\n";
+        cout << "1. Create Polynomial 1\n";
+        cout << "2. Create Polynomial 2\n";
+        cout << "3. Display Polynomial 1\n";
+        cout << "4. Display Polynomial 2\n";
+        cout << "5. Add Polynomials\n";
+        cout << "6. Display Resultant Polynomial\n";
+        cout << "7. Quit\n";
         cout << "Enter your choice: ";
         cin >> choice;
 
         switch (choice)
         {
         case 1:
-            cout << "Creating polynomial 1:\n";
-            poly1.create();
+            cout << "Enter number of terms for Polynomial 1: ";
+            cin >> n;
+            ob1.create(n);
             break;
+
         case 2:
-            cout << "Displaying polynomial 1:\n";
-            poly1.display();
+            cout << "Enter number of terms for Polynomial 2: ";
+            cin >> m;
+            ob2.create(m);
             break;
+
         case 3:
+            cout << "Polynomial 1: ";
+            ob1.display();
             break;
+
         case 4:
-            cout << "Exiting program. Goodbye!\n";
+            cout << "Polynomial 2: ";
+            ob2.display();
             break;
+
+        case 5:
+            result = ob1.addtopoly(ob2);
+            result.display();
+            cout << "Polynomials added successfully.\n";
+
+            break;
+
+        case 6:
+            cout << "Enter X value to Evaluate";
+            cin >> x;
+            ans = ob1.Evaluate(x);
+            cout << "After Evaluate polynomial" << ans << endl;
+            break;
+
+        case 7:
+            cout << "Exiting program.\n";
+            break;
+
         default:
-            cout << "Invalid choice! Please try again.\n";
+            cout << "Invalid choice. Please try again.\n";
         }
-    } while (choice != 4);
+    } while (choice != 7);
 
     return 0;
 }
