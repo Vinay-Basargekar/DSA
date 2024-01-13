@@ -122,7 +122,7 @@ void List::delRearEnd(){
 
 void List::delSpecified(int key){
     node *temp = head;
-    node *prev=NULL;
+    node *prev = NULL;
     // If the list is empty
     if (temp == NULL)
     {
@@ -208,7 +208,7 @@ void List::addBefore(int key){
 int main()
 {
     List lst;
-    int n, op;
+    int n, op = 0;
     cout << "Enter No. Of nodes: ";
     cin >> n;
     lst.create(n);

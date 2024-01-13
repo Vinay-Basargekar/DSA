@@ -1,3 +1,6 @@
+// Design and Develop Priority queue using linked representation and
+//demonstrate its use.
+
 #include <iostream>
 using namespace std;
 
