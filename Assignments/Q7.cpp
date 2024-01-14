@@ -3,6 +3,7 @@
 // b) Input a valid infix expression and convert it to prefix expression.
 
 #include <iostream>
+#include <cstring>
 using namespace std;
 
 const int MAX = 100;
