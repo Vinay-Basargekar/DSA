@@ -68,7 +68,7 @@ int prcd(char ch){
 
 void convert(char infi[80],char postf[80]){
     Stack s1; 
-    int i,j; 
+    int i,j=0; 
     char symb,st_symb;
     for(i=0;infi[i]!='\0';i++){
         symb = infi[i];
