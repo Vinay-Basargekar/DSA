@@ -4,7 +4,7 @@
 // b) Merge Sort
 
 #include<iostream>
-using namespace std;
+using namespace std; 
 
 int partition(int arr[], int low, int high)
 {
