@@ -1,9 +1,9 @@
-# Ignore compiled binaries
-*.exe
-*.out
-*.o
+# Ignore Unix executable files without extensions
+*
+!*/
+!*.cpp
+!*.h
 
-# Ignore build directories
-/build/
-/bin/
+.DS_Store
+
 
