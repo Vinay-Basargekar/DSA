@@ -1,16 +1,21 @@
+//Pattern 1
+
+// * * *
+// * * *
+// * * *
+
 #include<iostream>
 using namespace std;
 
-int main(){
-    int i,n;
-    cin>>n;
-    i=1;
-    while(i<=n){
-        int j;
-        for(int j=1;j<=n;j++){
-            cout<<j;
+void pattern1(int n){
+    for(int i=0 ; i<n ; i++){
+        for(int j=0 ; j<n ; j++){
+            cout << "* ";
         }
-        i++;
-        cout<<endl;
+        cout << endl;
     }
+}
+
+int main(){
+    pattern1(3);
 }
