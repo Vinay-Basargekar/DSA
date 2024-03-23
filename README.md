@@ -1,1 +1,1 @@
-#Lately I'm Into doing some Data Structure.
+These are all data structures that I've learned recently.
