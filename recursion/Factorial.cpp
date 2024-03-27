@@ -2,20 +2,13 @@
 using namespace std;
 
 int factorial(int n){
-    
     if(n==0){
         return 1;
     }
-    int fact;
-    fact = n * factorial(n-1);
-    return fact;
+    return n * factorial(n-1);
 }
 
-int main()
-{
-    int n,v;
-    cin >> n;
-    v = factorial(n);    
-    cout <<"factoria is :" << v;
+int main(){   
+    cout << factorial(5);
     return 0;
 }
