@@ -19,8 +19,7 @@ int main(){
 
     if (isPalindrome){
         cout << "Palindrome";
-    }
-    else{
+    }else{
         cout << "Not a Palindrome";
     }
     return 0;

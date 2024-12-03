@@ -1,20 +1,23 @@
-//Count the number of digits in a number.
-
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-int countNum(int n){
-    int count = 0 ;
-    while(n>0){
-        // int last = n % 10;
-        count++;
-        n = n / 10;
+// Function to count digits of n that divide n evenly
+int countDivisibleDigits(int n) {
+    int original = n;  
+    int count = 0;
+
+    while (n > 0) {
+        int digit = n % 10; 
+        if (digit != 0 && original % digit == 0) { 
+            count++;
+        }
+        n = n / 10; 
     }
     return count;
 }
 
-int main(){
-    cout << countNum(1234123124);
+int main() {
+    int n = 2446; 
+    cout << "Number of divisible digits in " << n << ": " << countDivisibleDigits(n) << endl;
+    return 0;
 }
-
-// TC : O(logbase10 N)
