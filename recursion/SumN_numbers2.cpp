@@ -9,6 +9,6 @@ int printSum(int n){
 }
 
 int main(){
-    int sum = printSum(5);
+    int sum = printSum(3);
     cout << "Sum of number: " << sum;
 }
