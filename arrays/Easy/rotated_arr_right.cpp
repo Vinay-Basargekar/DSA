@@ -7,6 +7,8 @@ int main(){
     cin >> k;
     int temp[5];
     int n = sizeof(arr) / sizeof(arr[0]);
+    // Normalize k to handle cases where k > n
+    k = k % n;
     for(int i=0 ; i < n ; i++){
         temp[(i+k) % n] = arr[i];
     }
