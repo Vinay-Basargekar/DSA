@@ -8,6 +8,11 @@ class Node{
         this.data = data;
         this.next = null;
     }
+
+    Node(int data,Node next){
+        this.data = data;
+        this.next = next;
+    }
 }
 
 public class Insertion {
@@ -32,11 +37,53 @@ public class Insertion {
         }
         System.out.println(); 
     }
-    
+
+    private static Node inserthead(Node head,int k){
+        Node x = new Node(k,head);
+        // x.next = head;
+        head = x;
+        return head;
+    }
+
+    private static Node insertTail(Node head,int k){
+        Node x = new Node(k);
+        Node temp = head;
+        while(temp.next != null){
+            temp = temp.next;
+        }
+        temp.next = x;
+        return head;
+    }
+
+    private static Node insertKth(Node head,int k,int el){
+        if(head == null){
+            return head;
+        }
+        if(k==1){
+            Node x = new Node(k,head);
+            return x;
+        }
+
+        Node temp = head;
+        int count = 0;
+        while(temp != null){
+            count++;
+            if(count == k){
+                Node x = new Node(el,temp.next);
+                temp.next = x;
+                break;
+            }
+            temp = temp.next;
+        }
+        return head;
+    }
+
     public static void main(String[] args) {
         int arr[] = {1,2,3,4,5};
         // Node x = new Node(2);
         Node head = ConvertArr2LL(arr);
+
+        head = insertKth(head,3,10);
 
         print(head);
 
