@@ -1,9 +1,15 @@
-# Ignore Unix executable files without extensions
+# Ignore all files
 *
+
+# Allow directories
 !*/
+
+# Allow specific file types
 !*.cpp
 !*.h
+!*.java
 
+# Ignore specific files
 .DS_Store
 
 
