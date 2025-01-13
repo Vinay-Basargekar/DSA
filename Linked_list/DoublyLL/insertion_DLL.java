@@ -1,4 +1,5 @@
 package Linked_list.DoublyLL;
+
 class Node{
     int data;
     Node next;
@@ -17,8 +18,7 @@ class Node{
     }
 }
 
-public class nodeCreate_DLL{
-
+public class insertion_DLL {
     private static void print(Node head) {
         Node current = head;
 
@@ -40,10 +40,13 @@ public class nodeCreate_DLL{
         }
         return head;
     } 
-    public static void main(String[] args) {
-        int arr[] = {1,2,3,4,55};
+
+    
+    public static void main(String args[]){
+        int arr[] = {10,20,30,40,50};
         Node head = convertArr2DLL(arr);
 
+        head = insertHead(head,6);
         print(head);
     }
 }

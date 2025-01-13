@@ -1,4 +1,3 @@
-// Create a Node structure
 // Defining Node structure
 class Node{
     int data;
@@ -37,7 +36,7 @@ public class Insertion {
         }
         System.out.println(); 
     }
-
+    
     private static Node inserthead(Node head,int k){
         Node x = new Node(k,head);
         // x.next = head;
@@ -69,7 +68,8 @@ public class Insertion {
         while(temp != null){
             count++;
             if(count == k){
-                Node x = new Node(el,temp.next);
+                Node x = new Node(el);
+                x.next = temp.next;
                 temp.next = x;
                 break;
             }

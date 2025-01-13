@@ -76,6 +76,7 @@ public class Deletion {
             prev = temp;
             temp = temp.next;
         }
+        temp.next = null;
         return head;
     }
     
