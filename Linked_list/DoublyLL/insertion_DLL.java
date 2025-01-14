@@ -41,12 +41,11 @@ public class insertion_DLL {
         return head;
     } 
 
-    
     public static void main(String args[]){
         int arr[] = {10,20,30,40,50};
         Node head = convertArr2DLL(arr);
 
-        head = insertHead(head,6);
+        // head = insertHead(head,6);
         print(head);
     }
 }
